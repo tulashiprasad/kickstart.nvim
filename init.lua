@@ -164,7 +164,7 @@ require('lazy').setup({
     config = function()
       -- disable netrw at the very start (already done at the top of your config)
       -- vim.g.loaded_netrw = 1
-      -- vim.g.loaded_netrwPlugin = 1
+      -- vim.g.loaded_netrwplugin = 1
 
       require('nvim-tree').setup {
         sort = {
@@ -197,6 +197,9 @@ require('lazy').setup({
     'nvim-tree/nvim-web-devicons',
     enabled = vim.g.have_nerd_font, -- Only load if using a Nerd Font
   },
+  {
+    'ThePrimeagen/vim-be-good',
+  },
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -207,31 +210,32 @@ require('lazy').setup({
 
   -- Alternatively, use `config = function() ... end` for full control over the configuration.
   -- If you prefer to call `setup` explicitly, use:
-  --    {
-  --        'lewis6991/gitsigns.nvim',
-  --        config = function()
-  --            require('gitsigns').setup({
-  --                -- Your gitsigns configuration here
-  --            })
-  --        end,
-  --    }
+  {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup {
+        -- Your gitsigns configuration here
+      }
+      vim.keymap.set('n', '<leader>gp', ':Gitsigns preview_hunk<CR>', { desc = 'preview hunk' })
+    end,
+  },
   --
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`.
   --
   -- See `:help gitsigns` to understand what the configuration keys do
-  { -- Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
+  -- { -- Adds git related signs to the gutter, as well as utilities for managing changes
+  -- 'lewis6991/gitsigns.nvim',
+  ---  opts = {
+  ---    signs = {
+  ---      add = { text = '+' },
+  ---      change = { text = '~' },
+  ---      delete = { text = '_' },
+  ---      topdelete = { text = '‾' },
+  ---      changedelete = { text = '~' },
+  ---    },
+  ---  },
+  -- },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
@@ -299,7 +303,7 @@ require('lazy').setup({
         { '<leader>s', group = '[S]earch' },
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>g', group = '[G]it' },
       },
     },
   },
